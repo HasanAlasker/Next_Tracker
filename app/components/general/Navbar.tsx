@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Construction } from "lucide-react";
+import {Helicopter} from "lucide-react/";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 
@@ -31,7 +31,7 @@ export default function Navbar() {
         ))}
       </div>
       <Link href={"/"}>
-        <Construction strokeWidth={1.5} size={30} />
+        <Helicopter strokeWidth={1.5} size={30} />
       </Link>
     </nav>
   );

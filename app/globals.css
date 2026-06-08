@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+:root {
+  --pri: oklch(49.1% 0.27 292.581);
+  --priHover: oklch(41.068% 0.22321 293.49);
+}
+
+@theme {
+  --color-pri: var(--pri);
+  --color-priHover: var(--priHover);
+}
+
+main {
+  padding: 1rem;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

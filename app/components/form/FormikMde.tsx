@@ -22,7 +22,7 @@ export default function FormikMde({ placeholder, label, name }: Props) {
   };
 
   return (
-    <>
+    <div className="flex flex-col space-y-2">
       {label && (
         <label className="label" htmlFor={name}>
           {label}
@@ -34,6 +34,6 @@ export default function FormikMde({ placeholder, label, name }: Props) {
         onChange={handleChange}
       />
       {hasErr && <p className="error">{errors[name]}</p>}
-    </>
+    </div>
   );
 }

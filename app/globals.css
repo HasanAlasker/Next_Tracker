@@ -8,6 +8,7 @@
   --secText: rgb(74, 74, 74);
   --fadedIcon: rgb(170, 170, 170);
   --card: rgb(255, 255, 255);
+  --red: red;
 }
 
 @theme {

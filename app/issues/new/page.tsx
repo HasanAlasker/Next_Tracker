@@ -8,8 +8,19 @@ import { Issue } from "../../types/issue";
 import FormikMde from "../../components/form/FormikMde";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import * as Yup from "yup";
+import { title } from "process";
+
+const validationSchema = Yup.object().shape({
+  title: Yup.string().required().min(2).max(255),
+  description: Yup.string().required().min(2),
+});
 
 export default function IssuesPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const [err, setErr] = useState(null);
+
   const router = useRouter();
 
   const initialValues = {
@@ -18,13 +29,24 @@ export default function IssuesPage() {
   };
 
   const handleSubmit = async (values: Issue) => {
-    const res = await axios.post("/api/issues", values);
-    console.log(res);
-    router.push("/issues");
+    setSubmitting(true);
+    try {
+      const res = await axios.post("/api/issues", values);
+      console.log(res);
+      router.push("/issues");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <AppForm initialValues={initialValues} onSubmit={handleSubmit}>
+    <AppForm
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
       <Form>
         <FormikInput
           placeholder="Enter task title"
@@ -37,7 +59,13 @@ export default function IssuesPage() {
           label="Description"
           placeholder="Type task description"
         />
-        <Button type="submit" icon="plus" isPri title={"Add Issue"} />
+        <Button
+          disabled={submitting}
+          type="submit"
+          icon="plus"
+          isPri
+          title={"Add Issue"}
+        />
       </Form>
     </AppForm>
   );

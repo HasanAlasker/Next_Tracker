@@ -1,8 +1,13 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
 import { Construction } from "lucide-react";
+import { usePathname } from "next/navigation";
+import classNames from "classnames";
 
 export default function Navbar() {
+  const pathName = usePathname();
+
   const LinkList = [
     { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues" },
@@ -15,13 +20,19 @@ export default function Navbar() {
           <Link
             key={link.href}
             href={link.href}
-            className="text-zinc-500 transition-all hover:text-black hover:-translate-y-1"
+            className={classNames({
+              "text-black": pathName === link.href,
+              "text-zinc-400": pathName !== link.href,
+              "transition-all hover:text-black hover:-translate-y-1": true,
+            })}
           >
             {link.label}
           </Link>
         ))}
       </div>
-      <Construction strokeWidth={1.5} size={30} />
+      <Link href={"/"}>
+        <Construction strokeWidth={1.5} size={30} />
+      </Link>
     </nav>
   );
 }

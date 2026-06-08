@@ -6,6 +6,7 @@ import AppForm from "../components/form/AppForm";
 import FormikInput from "../components/form/FormikInput";
 import { Form } from "formik";
 import { Issue } from "../types/issue";
+import FormikMde from "../components/form/FormikMde";
 
 export default function IssuesPage() {
   const initialValues = {
@@ -25,6 +26,11 @@ export default function IssuesPage() {
           label="Title"
           name="title"
           icon="text"
+        />
+        <FormikMde
+          name="description"
+          label="Description"
+          placeholder="Type task description"
         />
         <Button type="submit" icon="plus" isPri title={"Add Issue"} />
       </Form>

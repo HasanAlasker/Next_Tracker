@@ -1,0 +1,39 @@
+"use client";
+
+import SimpleMdeReact from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
+import { useFormikContext } from "formik";
+
+interface Props {
+  placeholder: string;
+  label: string;
+  name: string;
+}
+export default function FormikMde({ placeholder, label, name }: Props) {
+
+  const { errors, touched, setFieldValue, setFieldTouched } =
+    useFormikContext<Record<string, string>>();
+
+  const hasErr = touched[name] && errors[name];
+
+  const handleChange = (value: string) => {
+    setFieldValue(name, value);
+    setFieldTouched(name, true);
+  };
+
+  return (
+    <>
+      {label && (
+        <label className="label" htmlFor={name}>
+          {label}
+        </label>
+      )}
+      <SimpleMdeReact
+        className="input"
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
+      {hasErr && <p className="error">{errors[name]}</p>}
+    </>
+  );
+}

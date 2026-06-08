@@ -7,6 +7,9 @@ datasource db {
   provider = "postgresql"
 }
 
+// when you use prisma you don't have to redefine types for models and enums you have here
+// just use these as types
+
 model Issue {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)

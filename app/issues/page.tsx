@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Button from "../components/form/Button";
-import { prisma } from "../lib/prisma";
-import { Issue } from "../types/issue";
 import IssuesTable from "../components/tables/IssuesTable";
 
 export default async function IssuesPage() {

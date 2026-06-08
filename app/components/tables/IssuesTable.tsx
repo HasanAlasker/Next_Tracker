@@ -1,5 +1,6 @@
 import { prisma } from "@/app/lib/prisma";
-import { Issue } from "@/app/types/issue";
+import Badge from "../general/Badge";
+import { Issue } from "@/app/generated/prisma/client";
 
 export default async function IssuesTable() {
   const issues: Issue[] = await prisma.issue.findMany();
@@ -8,9 +9,13 @@ export default async function IssuesTable() {
     <tr key={i.id}>
       <td>
         {i.title}
-        <div className="block md:hidden">{i.status}</div>
+        <div className="block md:hidden">
+          <Badge status={i.status} />
+        </div>
       </td>
-      <td className="hidden md:table-cell">{i.status}</td>
+      <td className="hidden md:table-cell">
+        <Badge status={i.status} />
+      </td>
       <td className="hidden md:table-cell">
         {i.createdAt?.toLocaleDateString()}
       </td>

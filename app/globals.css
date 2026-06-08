@@ -3,7 +3,8 @@
 :root {
   --pri: oklch(49.1% 0.27 292.581);
   --priHover: oklch(41.068% 0.22321 293.49);
-  --outline: #eaeaea;
+  --light: #ebebeb;
+  --outline: #dcdcdc;
   --mainText: black;
   --secText: rgb(74, 74, 74);
   --fadedIcon: rgb(170, 170, 170);
@@ -86,6 +87,26 @@ Form {
   padding: 5vh 0;
 }
 
+table {
+  width: 100%;
+  border: 1px var(--outline) solid;
+  border-radius: 0.5rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+td,
+th {
+  /* border: 1px solid var(--outline); */
+  padding: 0.8rem;
+  text-align: left;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+th {
+  background-color: var(--light);
+  font-weight: 500;
+  color: var(--mainText);
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

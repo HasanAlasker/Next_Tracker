@@ -11,6 +11,7 @@ interface Props {
   isPri?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  full?: boolean
 }
 
 export default function Button({
@@ -20,6 +21,7 @@ export default function Button({
   isPri,
   type,
   disabled,
+  full
 }: Props) {
   const handleClick = () => {
     if (onClick) onClick();
@@ -35,6 +37,7 @@ export default function Button({
           ? "bg-pri text-white hover:bg-priHover hover:-translate-y-1"
           : "bg-white text-pri hover:bg-priHover hover:text-white hover:-translate-y-1",
         disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+        full && 'w-full'
       )}
       onClick={handleClick}
     >

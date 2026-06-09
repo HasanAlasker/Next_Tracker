@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Button from "../components/form/Button";
 import IssuesTable from "../components/tables/IssuesTable";
 import IssueActions from "./AddIssueBtn";
 

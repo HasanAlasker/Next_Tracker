@@ -1,13 +1,10 @@
+import { Issue } from "@/app/generated/prisma/client";
 import { prisma } from "@/app/lib/prisma";
 import Badge from "../general/Badge";
-import { Issue } from "@/app/generated/prisma/client";
 import StyledLink from "../general/StyledLink";
-import delay from "delay";
 
 export default async function IssuesTable() {
   const issues: Issue[] = await prisma.issue.findMany();
-
-  // await delay(2000);
 
   const List = issues.map((i) => (
     <tr key={i.id}>

@@ -1,6 +1,5 @@
-import React from "react";
-import Button from "../components/form/Button";
 import Link from "next/link";
+import Button from "../components/form/Button";
 
 export default function EditIssueBtn({ id }: { id: string }) {
   return (

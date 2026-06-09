@@ -1,7 +1,6 @@
 import { Issue } from "@/app/generated/prisma/client";
-import React from "react";
-import Badge from "../general/Badge";
 import Markdown from "react-markdown";
+import Badge from "../general/Badge";
 
 export default function IssueDetails({ issue }: { issue: Issue }) {
   return (

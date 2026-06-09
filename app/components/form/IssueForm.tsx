@@ -1,17 +1,17 @@
 "use client";
 
-import Button from "../../components/form/Button";
-import AppForm from "../../components/form/AppForm";
-import FormikInput from "../../components/form/FormikInput";
-import { Form } from "formik";
-import FormikMde from "../../components/form/FormikMde";
+import { status } from "@/app/constants/statusDDL";
+import { Issue } from "@/app/generated/prisma/client";
 import axios from "axios";
+import { Form } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
-import { Issue } from "@/app/generated/prisma/client";
+import AppForm from "../../components/form/AppForm";
+import Button from "../../components/form/Button";
+import FormikInput from "../../components/form/FormikInput";
+import FormikMde from "../../components/form/FormikMde";
 import FormikDropList from "./FormikDropList";
-import { status } from "@/app/constants/statusDDL";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),

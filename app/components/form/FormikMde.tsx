@@ -11,7 +11,7 @@ interface Props {
 }
 export default function FormikMde({ placeholder, label, name }: Props) {
 
-  const { errors, touched, setFieldValue, setFieldTouched } =
+  const { errors, touched, setFieldValue, setFieldTouched, values } =
     useFormikContext<Record<string, string>>();
 
   const hasErr = touched[name] && errors[name];
@@ -32,6 +32,7 @@ export default function FormikMde({ placeholder, label, name }: Props) {
         className="input"
         placeholder={placeholder}
         onChange={handleChange}
+        value={values[name]}
       />
       {hasErr && <p className="error">{errors[name]}</p>}
     </div>

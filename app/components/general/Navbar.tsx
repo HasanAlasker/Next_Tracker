@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {Helicopter} from "lucide-react/";
+import { Helicopter } from "lucide-react/";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 
@@ -14,7 +14,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="flex items-center justify-between text-2xl p-6 border-b border-zinc-400">
+    <nav className="flex items-center justify-between text-md md:text-xl px-6 py-4 mb-10 border-b border-zinc-400">
       <div className="flex space-x-6">
         {LinkList.map((link) => (
           <Link
@@ -23,7 +23,7 @@ export default function Navbar() {
             className={classNames({
               "text-black": pathName === link.href,
               "text-zinc-400": pathName !== link.href,
-              "transition-all hover:text-black hover:-translate-y-1": true,
+              "transition-all hover:text-black hover:-translate-y-1 ": true,
             })}
           >
             {link.label}

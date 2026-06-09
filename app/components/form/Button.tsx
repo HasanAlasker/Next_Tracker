@@ -41,8 +41,8 @@ export default function Button({
       )}
       onClick={handleClick}
     >
-      {title}
-      {icon && <DynamicIcon name={icon} />}
+      <p>{title}</p>
+      {icon && <DynamicIcon name={icon} size={18} />}
     </button>
   );
 }

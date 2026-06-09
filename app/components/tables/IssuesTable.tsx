@@ -1,6 +1,7 @@
 import { prisma } from "@/app/lib/prisma";
 import Badge from "../general/Badge";
 import { Issue } from "@/app/generated/prisma/client";
+import Link from "next/link";
 
 export default async function IssuesTable() {
   const issues: Issue[] = await prisma.issue.findMany();
@@ -8,7 +9,7 @@ export default async function IssuesTable() {
   const List = issues.map((i) => (
     <tr key={i.id}>
       <td>
-        {i.title}
+        <Link href={`/issues/${i.id}`}>{i.title}</Link>
         <div className="block md:hidden">
           <Badge status={i.status} />
         </div>

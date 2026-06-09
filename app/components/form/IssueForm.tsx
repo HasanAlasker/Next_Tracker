@@ -10,8 +10,9 @@ import * as Yup from "yup";
 import AppForm from "../../components/form/AppForm";
 import Button from "../../components/form/Button";
 import FormikInput from "../../components/form/FormikInput";
-import FormikMde from "../../components/form/FormikMde";
 import FormikDropList from "./FormikDropList";
+import FormikMde from "./FormikMde";
+
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
@@ -43,12 +44,13 @@ export default function IssuesForm({ issue }: Props) {
     try {
       if (issue) {
         const res = await axios.patch(`/api/issues/${issue.id}`, values);
-        console.log(res)
+        console.log(res);
       } else {
         await axios.post("/api/issues", values);
       }
 
       router.push("/issues");
+      router.refresh()
     } catch (error) {
       console.log(error);
     } finally {

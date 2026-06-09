@@ -9,13 +9,15 @@ export default async function IssuesTable() {
   const List = issues.map((i) => (
     <tr key={i.id}>
       <td>
-        <StyledLink
-          href={`/issues/${i.id}`}
-          text={i.title}
-          icon="arrow-up-right"
-        />
-        <div className="block md:hidden">
-          <Badge status={i.status} />
+        <div className="flex justify-between flex-wrap space-y-3">
+          <StyledLink
+            href={`/issues/${i.id}`}
+            text={i.title}
+            icon="arrow-up-right"
+          />
+          <div className="block md:hidden">
+            <Badge status={i.status} />
+          </div>
         </div>
       </td>
       <td className="hidden md:table-cell">

@@ -10,10 +10,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 import { Issue } from "@/app/generated/prisma/client";
+import FormikDropList from "./FormikDropList";
+import { status } from "@/app/constants/statusDDL";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
   description: Yup.string().required().min(2),
+  status: Yup.string(),
 });
 
 interface Props {
@@ -25,11 +28,11 @@ export default function IssuesForm({ issue }: Props) {
   const [err, setErr] = useState(null);
 
   const router = useRouter();
-  console.log(issue);
 
   const initialValues = {
     title: issue?.title ?? "",
     description: issue?.description ?? "",
+    status: issue?.status ?? "OPEN",
   };
 
   const handleSubmit = async (values: {
@@ -39,7 +42,8 @@ export default function IssuesForm({ issue }: Props) {
     setSubmitting(true);
     try {
       if (issue) {
-        await axios.patch(`/api/issues/${issue.id}`, values);
+        const res = await axios.patch(`/api/issues/${issue.id}`, values);
+        console.log(res)
       } else {
         await axios.post("/api/issues", values);
       }
@@ -59,6 +63,14 @@ export default function IssuesForm({ issue }: Props) {
       onSubmit={handleSubmit}
     >
       <Form>
+        {issue && (
+          <FormikDropList
+            name="status"
+            label="Issue status"
+            placeholder="Status"
+            options={status}
+          />
+        )}
         <FormikInput
           placeholder="Enter task title"
           label="Title"

@@ -38,8 +38,12 @@ export default function IssuesForm({ issue }: Props) {
   }) => {
     setSubmitting(true);
     try {
-      const res = await axios.post("/api/issues", values);
-      console.log(res);
+      if (issue) {
+        await axios.patch(`/api/issues/${issue.id}`, values);
+      } else {
+        await axios.post("/api/issues", values);
+      }
+
       router.push("/issues");
     } catch (error) {
       console.log(error);

@@ -1,5 +1,6 @@
 import Badge from "@/app/components/general/Badge";
 import { prisma } from "@/app/lib/prisma";
+import delay from "delay";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 
@@ -13,6 +14,8 @@ export default async function page({ params }: Props) {
 
   const issue = await prisma.issue.findUnique({ where: { id: issueId } });
   if (!issue) notFound();
+
+  //   await delay(2000)
 
   return (
     <div>

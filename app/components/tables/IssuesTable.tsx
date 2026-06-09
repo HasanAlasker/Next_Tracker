@@ -1,15 +1,22 @@
 import { prisma } from "@/app/lib/prisma";
 import Badge from "../general/Badge";
 import { Issue } from "@/app/generated/prisma/client";
-import Link from "next/link";
+import StyledLink from "../general/StyledLink";
+import delay from "delay";
 
 export default async function IssuesTable() {
   const issues: Issue[] = await prisma.issue.findMany();
 
+  // await delay(2000);
+
   const List = issues.map((i) => (
     <tr key={i.id}>
       <td>
-        <Link href={`/issues/${i.id}`}>{i.title}</Link>
+        <StyledLink
+          href={`/issues/${i.id}`}
+          text={i.title}
+          icon="arrow-up-right"
+        />
         <div className="block md:hidden">
           <Badge status={i.status} />
         </div>
@@ -17,9 +24,7 @@ export default async function IssuesTable() {
       <td className="hidden md:table-cell">
         <Badge status={i.status} />
       </td>
-      <td className="hidden md:table-cell">
-        {i.createdAt?.toLocaleDateString()}
-      </td>
+      <td className="hidden md:table-cell">{i.createdAt?.toDateString()}</td>
     </tr>
   ));
 
@@ -29,7 +34,7 @@ export default async function IssuesTable() {
         <tr>
           <th>Issue</th>
           <th className="hidden md:table-cell">Status</th>
-          <th className="hidden md:table-cell">Created At</th>
+          <th className="hidden md:table-cell">Created at</th>
         </tr>
       </thead>
       <tbody>{List}</tbody>

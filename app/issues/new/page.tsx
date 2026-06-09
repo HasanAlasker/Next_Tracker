@@ -4,13 +4,11 @@ import Button from "../../components/form/Button";
 import AppForm from "../../components/form/AppForm";
 import FormikInput from "../../components/form/FormikInput";
 import { Form } from "formik";
-import { Issue } from "../../types/issue";
 import FormikMde from "../../components/form/FormikMde";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
-import { title } from "process";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
@@ -28,7 +26,10 @@ export default function IssuesPage() {
     description: "",
   };
 
-  const handleSubmit = async (values: Issue) => {
+  const handleSubmit = async (values: {
+    title: string;
+    description: string;
+  }) => {
     setSubmitting(true);
     try {
       const res = await axios.post("/api/issues", values);

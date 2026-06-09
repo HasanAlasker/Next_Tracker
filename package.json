@@ -13,6 +13,7 @@
     "@prisma/client": "^7.8.0",
     "axios": "^1.17.0",
     "classnames": "^2.5.1",
+    "delay": "^7.0.0",
     "formik": "^2.4.9",
     "lucide-react": "^1.17.0",
     "next": "16.2.7",

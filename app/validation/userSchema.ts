@@ -5,3 +5,8 @@ export const userRegister = z.object({
   email: email(),
   password: string(),
 });
+
+export const userLogin = z.object({
+  email: email(),
+  password: string(),
+});

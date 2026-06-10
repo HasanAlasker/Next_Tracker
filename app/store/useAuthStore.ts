@@ -2,12 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { User } from "../generated/prisma/client";
 import axios from "axios";
-
-interface AuthPayload {
-  email: string;
-  password: string;
-  name?: string;
-}
+import { AuthPayload } from "../types/auth";
 
 interface UserState {
   user: User | null;
@@ -41,8 +36,9 @@ export const useAuthStore = create<UserState>()(
         try {
           set({ loading: true, error: false });
           const res = await axios.post(`/api/auth/login`, data);
+          console.log(res)
           if (res.status === 200) {
-            const user = res.data.value;
+            const user = res.data.user;
             const token = res.headers["x-auth-token"];
             get().saveUser(user, token);
           }
@@ -58,9 +54,9 @@ export const useAuthStore = create<UserState>()(
       register: async (data: AuthPayload) => {
         try {
           set({ loading: true, error: false });
-          const res = await axios.post(`/api/auth/register`, data)
+          const res = await axios.post(`/api/auth/register`, data);
           if (res.status === 201) {
-            const user = res.data.value;
+            const user = res.data.user;
             const token = res.headers["x-auth-token"];
             get().saveUser(user, token);
           }

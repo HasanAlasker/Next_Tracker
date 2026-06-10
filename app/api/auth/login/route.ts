@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     const { password, ...userPayload } = user;
 
-    const res = NextResponse.json({ user: userPayload }, { status: 201 });
+    const res = NextResponse.json({ user: userPayload }, { status: 200 });
     res.headers.set("x-auth-token", token);
     return res
   } catch (error) {

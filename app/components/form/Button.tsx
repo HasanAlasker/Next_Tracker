@@ -34,7 +34,7 @@ export default function Button({
       disabled={disabled}
       type={type ?? "button"}
       className={classNames(
-        "flex items-center justify-center px-5 py-3 space-x-2 border-3 border-pri rounded-lg font-bold text-md transition-all cursor-pointer",
+        "flex items-center justify-center px-5 py-2 space-x-2 border-3 border-pri rounded-lg font-bold text-md transition-all cursor-pointer",
         isDelete && "bg-red-500 border-red-500 hover:bg-red-700",
         isPri
           ? "bg-pri text-white hover:bg-priHover hover:-translate-y-1"

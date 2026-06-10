@@ -25,7 +25,7 @@ model Issue {
   title       String   @db.VarChar(255)
   description String   @db.Text
   status      Status   @default(OPEN)
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User?     @relation(fields: [authorId], references: [id]) // todo: remove ? 
   authorId    Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

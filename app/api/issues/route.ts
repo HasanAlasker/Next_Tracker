@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       data: {
         title: body.title,
         description: body.description,
-        authorId: body.authorId
+        authorId: 1 // todo: get author id from req header, send authorId in header
       },
     });
 
@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ issue }, { status: 201 });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

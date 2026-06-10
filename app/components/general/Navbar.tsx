@@ -11,6 +11,7 @@ export default function Navbar() {
   const LinkList = [
     { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues" },
+    { label: "Sign up", href: "/auth/register" },
   ];
 
   return (

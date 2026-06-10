@@ -1,10 +1,11 @@
+import { Issue } from "@/app/generated/prisma/client";
 import { prisma } from "@/app/lib/prisma";
 import { issueSchema } from "@/app/validation/issueSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body: Issue = await request.json();
     const validation = issueSchema.safeParse(body);
 
     if (!validation.success)
@@ -17,6 +18,7 @@ export async function POST(request: NextRequest) {
       data: {
         title: body.title,
         description: body.description,
+        authorId: body.authorId
       },
     });
 

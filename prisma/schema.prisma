@@ -10,11 +10,23 @@ datasource db {
 // when you use prisma you don't have to redefine types for models and enums you have here
 // just use these as types
 
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  issues    Issue[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Issue {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
   description String   @db.Text
   status      Status   @default(OPEN)
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

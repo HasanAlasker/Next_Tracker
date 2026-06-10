@@ -2,6 +2,7 @@ import IssueDetails from "@/app/components/tables/IssueDetails";
 import { prisma } from "@/app/lib/prisma";
 import { notFound } from "next/navigation";
 import EditIssueBtn from "../EditIssueBtn";
+import DeleteIssueBtn from "../DeleteIssueBtn";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -17,7 +18,10 @@ export default async function page({ params }: Props) {
   return (
     <div>
       <IssueDetails issue={issue} />
-      <EditIssueBtn id={id} />
+      <div className="flex space-x-4">
+        <EditIssueBtn id={id} />
+        <DeleteIssueBtn id={Number(id)} />
+      </div>
     </div>
   );
 }

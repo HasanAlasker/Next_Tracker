@@ -13,7 +13,7 @@ export default function loading() {
           <Skeleton width={"8rem"} />
         </p>
       </div>
-      <div className="prose border-2 border-zinc-300 rounded-lg p-5 mt-10">
+      <div className="border-2 border-zinc-300 rounded-lg p-5 mt-10">
         <Skeleton count={5} />
       </div>
     </div>

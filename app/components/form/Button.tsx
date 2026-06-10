@@ -9,9 +9,10 @@ interface Props {
   title: string | ReactNode;
   onClick?: () => void;
   isPri?: boolean;
+  isDelete?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  full?: boolean
+  full?: boolean;
 }
 
 export default function Button({
@@ -19,9 +20,10 @@ export default function Button({
   title,
   onClick,
   isPri,
+  isDelete,
   type,
   disabled,
-  full
+  full,
 }: Props) {
   const handleClick = () => {
     if (onClick) onClick();
@@ -33,11 +35,12 @@ export default function Button({
       type={type ?? "button"}
       className={classNames(
         "flex items-center justify-center px-5 py-3 space-x-2 border-3 border-pri rounded-lg font-bold text-md transition-all cursor-pointer",
+        isDelete && "bg-red-500 border-red-500 hover:bg-red-700",
         isPri
           ? "bg-pri text-white hover:bg-priHover hover:-translate-y-1"
           : "bg-white text-pri hover:bg-priHover hover:text-white hover:-translate-y-1",
         disabled && "opacity-50 cursor-not-allowed pointer-events-none",
-        full && 'w-full'
+        full && "w-full",
       )}
       onClick={handleClick}
     >

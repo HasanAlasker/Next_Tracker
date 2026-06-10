@@ -8,9 +8,14 @@ interface Props {
   placeholder: string;
   label: string;
   name: string;
+  className?: string;
 }
-export default function FormikMde({ placeholder, label, name }: Props) {
-
+export default function FormikMde({
+  placeholder,
+  label,
+  name,
+  className,
+}: Props) {
   const { errors, touched, setFieldValue, setFieldTouched, values } =
     useFormikContext<Record<string, string>>();
 
@@ -29,7 +34,7 @@ export default function FormikMde({ placeholder, label, name }: Props) {
         </label>
       )}
       <SimpleMdeReact
-        className="input"
+        className={`input ${className ? className : ""}`}
         placeholder={placeholder}
         onChange={handleChange}
         value={values[name]}

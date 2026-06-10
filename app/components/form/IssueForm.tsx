@@ -13,7 +13,6 @@ import FormikInput from "../../components/form/FormikInput";
 import FormikDropList from "./FormikDropList";
 import FormikMde from "./FormikMde";
 
-
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
   description: Yup.string().required().min(2),
@@ -50,7 +49,7 @@ export default function IssuesForm({ issue }: Props) {
       }
 
       router.push("/issues");
-      router.refresh()
+      router.refresh();
     } catch (error) {
       console.log(error);
     } finally {

@@ -10,7 +10,7 @@ export default function IssueDetails({ issue }: { issue: Issue }) {
         <Badge status={issue.status} />
         <p>{issue.createdAt.toDateString()}</p>
       </div>
-      <div className="prose border-2 border-zinc-300 rounded-lg p-5 mt-10 mb-10">
+      <div className="prose max-w-full border-2 border-zinc-300 rounded-lg p-5 mt-10 mb-10">
         <Markdown>{issue.description}</Markdown>
       </div>
     </>

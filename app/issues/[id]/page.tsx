@@ -20,7 +20,7 @@ export default async function page({ params }: Props) {
       <IssueDetails issue={issue} />
       <div className="flex space-x-4">
         <EditIssueBtn id={id} />
-        <DeleteIssueBtn id={Number(id)} />
+        <DeleteIssueBtn id={id} />
       </div>
     </div>
   );

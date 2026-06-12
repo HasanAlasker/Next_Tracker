@@ -42,9 +42,6 @@ export default function Navbar() {
         ))}
       </div>
       <div className="flex space-x-4 items-center">
-        <Link href={"/"}>
-          <Helicopter strokeWidth={1.5} size={30} />
-        </Link>
         {user && (
           <Button
             isDelete
@@ -54,6 +51,9 @@ export default function Navbar() {
             onClick={handleLogout}
           />
         )}
+        <Link href={"/"}>
+          <Helicopter strokeWidth={1.5} size={30} />
+        </Link>
       </div>
     </nav>
   );

@@ -1,11 +1,17 @@
 import { Issue } from "@/app/generated/prisma/client";
+import { getAuthUser } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
 import { issueSchema } from "@/app/validation/issueSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
+    const user = getAuthUser(request);
     const body: Issue = await request.json();
+
+    if (!user)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const validation = issueSchema.safeParse(body);
 
     if (!validation.success)
@@ -18,7 +24,7 @@ export async function POST(request: NextRequest) {
       data: {
         title: body.title,
         description: body.description,
-        authorId: 1 // todo: get author id from req header, send authorId in header
+        authorId: user.id,
       },
     });
 
@@ -30,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ issue }, { status: 201 });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

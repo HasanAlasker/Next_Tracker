@@ -26,9 +26,11 @@ export const useAuthStore = create<UserState>()(
 
       saveUser: (user: User, token: string) => {
         set({ user, token });
+        document.cookie = `token=${token};  path=/; max-age=${60 * 60 * 24 * 7}`;
       },
 
-      logout: () => {
+      logout: async () => {
+        await axios.post(`api/auth/logout`);
         set({ user: null, token: null });
       },
 
@@ -36,7 +38,7 @@ export const useAuthStore = create<UserState>()(
         try {
           set({ loading: true, error: false });
           const res = await axios.post(`/api/auth/login`, data);
-          console.log(res)
+          console.log("res from store:", res.data);
           if (res.status === 200) {
             const user = res.data.user;
             const token = res.headers["x-auth-token"];
@@ -45,7 +47,7 @@ export const useAuthStore = create<UserState>()(
           return res;
         } catch (error) {
           set({ error: true });
-          console.log(error);
+          throw error;
         } finally {
           set({ loading: false });
         }
@@ -63,7 +65,7 @@ export const useAuthStore = create<UserState>()(
           return res;
         } catch (error) {
           set({ error: true });
-          console.log(error);
+          throw error;
         } finally {
           set({ loading: false });
         }

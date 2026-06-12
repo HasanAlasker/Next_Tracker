@@ -6,10 +6,13 @@ import { useAuthStore } from "@/app/store/useAuthStore";
 import { AuthPayload } from "@/app/types/auth";
 import { Form } from "formik";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Login() {
-  const { login } = useAuthStore();
+  const { login, loading } = useAuthStore();
   const router = useRouter();
+
+  const [err, setErr] = useState(null);
 
   const initialValues = {
     name: "",
@@ -20,8 +23,13 @@ export default function Login() {
   const handleSubmit = async (values: AuthPayload) => {
     try {
       const res = await login(values);
+      console.log("res: ", res.data);
       if (res.status === 200) router.push("/");
-    } catch (error) {}
+    } catch (error: any) {
+      const message = error.response?.data?.error ?? "something went wrong";
+      setErr(message);
+      console.log(message);
+    }
   };
   return (
     <AppForm initialValues={initialValues} onSubmit={handleSubmit}>
@@ -39,6 +47,7 @@ export default function Login() {
           icon="key-round"
         />
         <Button type="submit" title={"Login"} isPri />
+        {err && <p className="error">{err}</p>}
         <hr />
         <Button
           title={"Register"}

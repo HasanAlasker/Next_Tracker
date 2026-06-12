@@ -2,9 +2,13 @@ import { Issue } from "@/app/generated/prisma/client";
 import { prisma } from "@/app/lib/prisma";
 import Badge from "../general/Badge";
 import StyledLink from "../general/StyledLink";
+import { getServerUser } from "@/app/lib/auth";
 
 export default async function IssuesTable() {
-  const issues: Issue[] = await prisma.issue.findMany();
+  const user = await getServerUser();
+  const issues: Issue[] = await prisma.issue.findMany({
+    where: { authorId: user?.id },
+  });
 
   const List = issues.map((i) => (
     <tr key={i.id}>

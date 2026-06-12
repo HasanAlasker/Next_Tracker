@@ -2,7 +2,7 @@
 
 import { status } from "@/app/constants/statusDDL";
 import { Issue } from "@/app/generated/prisma/client";
-import axios from "axios";
+import apiClient from "@/app/lib/apiClient";
 import { Form } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -42,10 +42,10 @@ export default function IssuesForm({ issue }: Props) {
     setSubmitting(true);
     try {
       if (issue) {
-        const res = await axios.patch(`/api/issues/${issue.id}`, values);
+        const res = await apiClient.patch(`/issues/${issue.id}`, values);
         console.log(res);
       } else {
-        await axios.post("/api/issues", values);
+        await apiClient.post("/issues", values);
       }
 
       router.push("/issues");

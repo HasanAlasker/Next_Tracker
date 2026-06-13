@@ -4,7 +4,6 @@ import Button from "../components/form/Button";
 export default function IssueActions() {
   return (
     <Button
-      full
       isPri
       title={<Link href={"/issues/new"}>Add Issue</Link>}
       icon="receipt-text"

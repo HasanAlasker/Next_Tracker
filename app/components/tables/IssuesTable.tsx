@@ -1,13 +1,15 @@
-import { Issue } from "@/app/generated/prisma/client";
+import { Issue, Status } from "@/app/generated/prisma/client";
 import { prisma } from "@/app/lib/prisma";
 import Badge from "../general/Badge";
 import StyledLink from "../general/StyledLink";
-import { getServerUser } from "@/app/lib/auth";
 
-export default async function IssuesTable() {
-  const user = await getServerUser();
+interface Props {
+  status?: Status;
+}
+
+export default async function IssuesTable({ status }: Props) {
   const issues: Issue[] = await prisma.issue.findMany({
-    // where: { authorId: user?.id },
+    where: { status },
   });
 
   const List = issues.map((i) => (

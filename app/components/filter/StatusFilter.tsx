@@ -1,31 +1,30 @@
-import { useFormikContext } from "formik";
+"use client";
 import { DynamicIcon, IconName } from "lucide-react/dynamic";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 interface Props {
   label?: string;
   name: string;
   options: Record<string, string | number>[];
-  placeholder: string;
+  placeholder?: string;
   icon?: IconName;
 }
 
-export default function FormikDropList({
+export default function StatusFilter({
   label,
   name,
   options,
   icon,
   placeholder,
 }: Props) {
-  const { values, errors, touched, setFieldValue, setFieldTouched, status } =
-    useFormikContext<Record<string, string>>();
-
-  const shouldShowErr = errors[name] && touched[name] && !values[name];
+  const [value, setValue] = useState("");
+  const router = useRouter();
 
   const handelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFieldValue(name, e.target.value);
-    console.log(e.target.value)
-    setFieldTouched(name, true);
+    setValue(e.target.value);
+    const query = e.target.value ? `?status=${e.target.value}` : "/issues";
+    router.push(query);
   };
 
   const optionList = options?.map((o) => (
@@ -35,13 +34,13 @@ export default function FormikDropList({
   ));
 
   return (
-    <div className="inputGroup">
+    <div className="inputGroup max-w-fit">
       {label && (
         <label className="label" htmlFor={name}>
           {label}
         </label>
       )}
-      <div className={`inputField  ${shouldShowErr && "inputErr"}`}>
+      <div className={`inputField`}>
         {icon && (
           <DynamicIcon
             name={icon}
@@ -52,9 +51,8 @@ export default function FormikDropList({
         )}
         <select
           name={name}
-          value={values[name]}
+          value={value}
           onChange={handelChange}
-          onBlur={() => setFieldTouched(name, true)}
           className={`input`}
         >
           <option value="" disabled>
@@ -63,7 +61,6 @@ export default function FormikDropList({
           {optionList}
         </select>
       </div>
-      {shouldShowErr && <p className="error">{errors[name]}</p>}
     </div>
   );
 }

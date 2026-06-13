@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
       data: {
         title: body.title,
         description: body.description,
+        assignedToId: Number(body.assignedToId),
         authorId: user.id,
       },
     });

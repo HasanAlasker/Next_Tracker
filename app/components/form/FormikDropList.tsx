@@ -5,7 +5,7 @@ import React from "react";
 interface Props {
   label: string;
   name: string;
-  options: Record<string, string>[];
+  options: Record<string, string | number>[];
   placeholder: string;
   icon?: IconName;
 }

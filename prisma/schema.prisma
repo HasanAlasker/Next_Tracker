@@ -11,24 +11,27 @@ datasource db {
 // just use these as types
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  issues    Issue[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  password   String
+  issues     Issue[]  @relation("CreatedIssues")
+  assignedTo Issue[]  @relation("AssignedIssues")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Issue {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String   @db.Text
-  status      Status   @default(OPEN)
-  author      User?     @relation(fields: [authorId], references: [id]) // todo: remove ? 
-  authorId    Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(255)
+  description  String   @db.Text
+  status       Status   @default(OPEN)
+  author       User     @relation("CreatedIssues", fields: [authorId], references: [id])
+  authorId     Int
+  assignTo     User     @relation("AssignedIssues", fields: [assignedToId], references: [id])
+  assignedToId Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 enum Status {

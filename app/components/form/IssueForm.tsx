@@ -1,11 +1,11 @@
 "use client";
 
 import { status } from "@/app/constants/statusDDL";
-import { Issue } from "@/app/generated/prisma/client";
+import { Issue, User } from "@/app/generated/prisma/client";
 import apiClient from "@/app/lib/apiClient";
 import { Form } from "formik";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import AppForm from "../../components/form/AppForm";
 import Button from "../../components/form/Button";
@@ -17,6 +17,7 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
   description: Yup.string().required().min(2),
   status: Yup.string(),
+  assignedToId: Yup.number().required(),
 });
 
 interface Props {
@@ -27,18 +28,36 @@ export default function IssuesForm({ issue }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [err, setErr] = useState(null);
 
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data: any = await apiClient.get("/users");
+      setUsers(data.data.users);
+    };
+    fetchUsers();
+  }, []);
+
+  const options = users?.map((u) => ({
+    lable: u.name,
+    value: u.id,
+  }));
+
   const router = useRouter();
 
   const initialValues = {
     title: issue?.title ?? "",
     description: issue?.description ?? "",
     status: issue?.status ?? "OPEN",
+    assignedToId: issue?.assignedToId ?? 0,
   };
 
   const handleSubmit = async (values: {
     title: string;
     description: string;
+    assignedToId: number
   }) => {
+    console.log(values)
     setSubmitting(true);
     try {
       if (issue) {
@@ -82,6 +101,12 @@ export default function IssuesForm({ issue }: Props) {
           name="description"
           label="Description"
           placeholder="Type task description"
+        />
+        <FormikDropList
+          name="assignedToId"
+          label="Assigned to"
+          placeholder="Assign to"
+          options={options}
         />
         <Button
           disabled={submitting}

@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).max(255),
   description: Yup.string().required().min(2),
   status: Yup.string(),
-  assignedToId: Yup.number().required(),
+  assignedToId: Yup.number().required().transform(Number),
 });
 
 interface Props {
@@ -39,8 +39,8 @@ export default function IssuesForm({ issue }: Props) {
   }, []);
 
   const options = users?.map((u) => ({
-    lable: u.name,
-    value: u.id,
+    label: u.name,
+    value: String(u.id),
   }));
 
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function IssuesForm({ issue }: Props) {
     title: issue?.title ?? "",
     description: issue?.description ?? "",
     status: issue?.status ?? "OPEN",
-    assignedToId: issue?.assignedToId ?? 0,
+    assignedToId: issue?.assignedToId ?? 1,
   };
 
   const handleSubmit = async (values: {

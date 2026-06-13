@@ -7,7 +7,7 @@ import { getServerUser } from "@/app/lib/auth";
 export default async function IssuesTable() {
   const user = await getServerUser();
   const issues: Issue[] = await prisma.issue.findMany({
-    where: { authorId: user?.id },
+    // where: { authorId: user?.id },
   });
 
   const List = issues.map((i) => (

@@ -24,12 +24,13 @@ export default function FormikDropList({
 
   const handelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFieldValue(name, e.target.value);
+    console.log(e.target.value)
     setFieldTouched(name, true);
   };
 
   const optionList = options?.map((o) => (
     <option key={o.value} value={o.value}>
-      {o.lable}
+      {o.label}
     </option>
   ));
 

@@ -104,8 +104,8 @@ table {
 }
 td,
 th {
-  /* border: 1px solid var(--outline); */
-  padding: 0.8rem;
+  border-bottom: 1px solid var(--fadedIcon);
+  padding: .8rem;
   text-align: left;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 }

@@ -11,13 +11,15 @@ const MAP: Record<Status, { label: string; className: string }> = {
 
 interface Props {
   status: Status;
+  style?: any;
 }
 
-export default function Badge({ status }: Props) {
+export default function Badge({ status, style }: Props) {
   const { label, className } = MAP[status];
   return (
     <span
-      className={`px-2.5 py-1 rounded-md text-sm font-medium ${className}`}
+      className={`px-2.5 py-1 rounded-md text-sm font-medium w-fit ${className}`}
+      style={style}
     >
       {label}
     </span>

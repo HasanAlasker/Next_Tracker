@@ -9,7 +9,7 @@ interface Props {
 export default function StyledLink({ text, href, icon }: Props) {
   return (
     <Link href={href}>
-      <div className="flex space-x-4 text-pri items-end transition-all hover:underline ">
+      <div className="flex space-x-4 text-black items-end transition-all hover:underline ">
         {text}
         {icon && <DynamicIcon name={icon} size={20} className="pb-1" />}
       </div>

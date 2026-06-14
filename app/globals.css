@@ -30,6 +30,9 @@ h1 {
   font-weight: bold;
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
+button {
+  font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+}
 .inputGroup {
   flex: 1;
   flex-shrink: 1;

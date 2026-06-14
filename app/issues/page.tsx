@@ -1,4 +1,5 @@
 import StatusFilter from "../components/filter/StatusFilter";
+import Pagination from "../components/general/Pagination";
 import IssuesTable from "../components/tables/IssuesTable";
 import { status } from "../constants/statusDDL";
 import { Issue } from "../generated/prisma/client";
@@ -15,7 +16,7 @@ export default async function IssuesPage({ searchParams }: Props) {
   const { status, orderBy } = (await searchParams) ?? {};
 
   return (
-    <div className="flex flex-col space-y-10">
+    <div className="flex flex-col space-y-10 flex-wrap">
       <div className="flex justify-between items-center">
         <StatusFilter
           name="status"
@@ -25,6 +26,7 @@ export default async function IssuesPage({ searchParams }: Props) {
         <IssueActions />
       </div>
       <IssuesTable status={status} orderBy={orderBy} />
+      <Pagination itemCount={100} pageNumber={1} pageSize={10} />
     </div>
   );
 }

@@ -4,16 +4,26 @@ import IssuesTable from "../components/tables/IssuesTable";
 import { status } from "../constants/statusDDL";
 import { Issue } from "../generated/prisma/client";
 import { Status } from "../generated/prisma/enums";
+import { prisma } from "../lib/prisma";
 import IssueActions from "./AddIssueBtn";
 
 const options = [{ label: "All", value: "" }, ...status];
 
 interface Props {
-  searchParams?: Promise<{ status: Status; orderBy: keyof Issue }>;
+  searchParams?: Promise<{
+    status: Status;
+    orderBy: keyof Issue;
+    page: string;
+  }>;
 }
 
 export default async function IssuesPage({ searchParams }: Props) {
-  const { status, orderBy } = (await searchParams) ?? {};
+  const { status, orderBy, page } = (await searchParams) ?? {};
+  const pageSize = 5
+
+  const count: number = await prisma.issue.count({
+    where: status ? { status } : undefined,
+  });
 
   return (
     <div className="flex flex-col space-y-10 flex-wrap">
@@ -25,8 +35,17 @@ export default async function IssuesPage({ searchParams }: Props) {
         />
         <IssueActions />
       </div>
-      <IssuesTable status={status} orderBy={orderBy} />
-      <Pagination itemCount={100} pageNumber={1} pageSize={10} />
+      <IssuesTable
+        status={status}
+        orderBy={orderBy}
+        page={Number(page || 1)}
+        pageSize={pageSize}
+      />
+      <Pagination
+        itemCount={count}
+        pageNumber={Number(page || 1)}
+        pageSize={pageSize}
+      />
     </div>
   );
 }

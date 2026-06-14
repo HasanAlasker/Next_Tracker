@@ -8,12 +8,16 @@ import { DynamicIcon } from "lucide-react/dynamic";
 interface Props {
   status?: Status;
   orderBy?: keyof Issue;
+  page?: number;
+  pageSize: number
 }
 
-export default async function IssuesTable({ status, orderBy }: Props) {
+export default async function IssuesTable({ status, orderBy, page, pageSize }: Props) {
   const issues: Issue[] = await prisma.issue.findMany({
     where: { status },
     orderBy: orderBy ? { [orderBy]: "asc" } : undefined,
+    skip: (page! - 1) * pageSize,
+    take: pageSize,
   });
 
   const heads = [

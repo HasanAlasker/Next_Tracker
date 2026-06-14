@@ -24,9 +24,9 @@ export default function StatusFilter({
   const router = useRouter();
 
   const handelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const params = new URLSearchParams();
     setValue(e.target.value);
-    if (e.target.value) params.append("status", e.target.value);
+    const params = new URLSearchParams();
+    if (e.target.value) params.set("status", e.target.value);
     if (searchParams.get("orderBy"))
       params.append("orderBy", searchParams.get("orderBy")!);
 

@@ -1,6 +1,6 @@
 "use client";
 import { DynamicIcon, IconName } from "lucide-react/dynamic";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 interface Props {
@@ -18,12 +18,19 @@ export default function StatusFilter({
   icon,
   placeholder,
 }: Props) {
-  const [value, setValue] = useState("");
+  const searchParams = useSearchParams();
+
+  const [value, setValue] = useState(searchParams.get("status") ?? "");
   const router = useRouter();
 
   const handelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const params = new URLSearchParams();
     setValue(e.target.value);
-    const query = e.target.value ? `?status=${e.target.value}` : "/issues";
+    if (e.target.value) params.append("status", e.target.value);
+    if (searchParams.get("orderBy"))
+      params.append("orderBy", searchParams.get("orderBy")!);
+
+    const query = params.size ? `?${params.toString()}` : "/issues";
     router.push(query);
   };
 

@@ -1,18 +1,18 @@
 import StatusFilter from "../components/filter/StatusFilter";
 import IssuesTable from "../components/tables/IssuesTable";
 import { status } from "../constants/statusDDL";
+import { Issue } from "../generated/prisma/client";
 import { Status } from "../generated/prisma/enums";
 import IssueActions from "./AddIssueBtn";
 
 const options = [{ label: "All", value: "" }, ...status];
 
 interface Props {
-  searchParams?: Promise<{ status: Status }>;
+  searchParams?: Promise<{ status: Status; orderBy: keyof Issue }>;
 }
 
 export default async function IssuesPage({ searchParams }: Props) {
-  const { status } = (await searchParams) ?? {};
-  console.log(status);
+  const { status, orderBy } = (await searchParams) ?? {};
 
   return (
     <div className="flex flex-col space-y-10">
@@ -24,7 +24,7 @@ export default async function IssuesPage({ searchParams }: Props) {
         />
         <IssueActions />
       </div>
-      <IssuesTable status={status}/>
+      <IssuesTable status={status} orderBy={orderBy} />
     </div>
   );
 }

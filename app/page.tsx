@@ -25,6 +25,7 @@ export default async function Home() {
     </div>
   );
 }
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Issue Tracker - Dashboard",

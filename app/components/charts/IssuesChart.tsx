@@ -17,7 +17,8 @@ export default function IssuesChart({ open, closed, inProg }: Props) {
   return (
     <ResponsiveContainer
       width={"100%"}
-      className={"bg-white p-5 pb-2 pl-0 rounded-xl border-outline border min-h-96"}
+      minHeight={300}
+      className={"bg-white p-5 pb-2 pl-0 rounded-xl border-outline border"}
     >
       <BarChart data={data}>
         <XAxis dataKey="label" />

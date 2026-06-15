@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import StatusFilter from "../components/filter/StatusFilter";
 import Pagination from "../components/general/Pagination";
 import IssuesTable from "../components/tables/IssuesTable";
@@ -51,3 +52,8 @@ export default async function IssuesPage({ searchParams }: Props) {
 }
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issues",
+  description: "View all project issues"
+}

@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { Helicopter } from "lucide-react/";
-import { usePathname, useRouter } from "next/navigation";
-import classNames from "classnames";
 import { useAuthStore } from "@/app/store/useAuthStore";
-import Button from "../form/Button";
+import classNames from "classnames";
+import { LogOut } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { user, logout } = useAuthStore();
@@ -41,20 +40,8 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-      <div className="flex space-x-4 items-center">
-        {user && (
-          <Button
-            isDelete
-            isPri
-            title={"Log out"}
-            icon="log-out"
-            onClick={handleLogout}
-          />
-        )}
-        <Link href={"/"}>
-          <Helicopter strokeWidth={1.5} size={30} />
-        </Link>
-      </div>
+
+      {user && <LogOut color="red" onClick={handleLogout} />}
     </nav>
   );
 }

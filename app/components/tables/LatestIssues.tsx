@@ -1,7 +1,5 @@
 import { prisma } from "@/app/lib/prisma";
-import React from "react";
 import Badge from "../general/Badge";
-import Link from "next/link";
 import StyledLink from "../general/StyledLink";
 
 export default async function LatestIssues() {
@@ -32,7 +30,7 @@ export default async function LatestIssues() {
   ));
 
   return (
-    <div>
+    <div className="flex flex-col flex-1">
       <h1 className="mb-7">Latest Issues</h1>
       <table>
         <tbody>{issuesList}</tbody>

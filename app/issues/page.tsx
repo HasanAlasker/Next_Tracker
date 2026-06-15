@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import StatusFilter from "../components/filter/StatusFilter";
+import PageSizeDDL from "../components/form/PageSizeDDL";
 import Pagination from "../components/general/Pagination";
 import IssuesTable from "../components/tables/IssuesTable";
 import { status } from "../constants/statusDDL";
@@ -15,12 +16,13 @@ interface Props {
     status: Status;
     orderBy: keyof Issue;
     page: string;
+    pageSize: string;
   }>;
 }
 
 export default async function IssuesPage({ searchParams }: Props) {
-  const { status, orderBy, page } = (await searchParams) ?? {};
-  const pageSize = 5
+  const { status, orderBy, page, pageSize } = (await searchParams) ?? {};
+  const pgSize = Number(pageSize) || 5;
 
   const count: number = await prisma.issue.count({
     where: status ? { status } : undefined,
@@ -40,13 +42,20 @@ export default async function IssuesPage({ searchParams }: Props) {
         status={status}
         orderBy={orderBy}
         page={Number(page || 1)}
-        pageSize={pageSize}
+        pageSize={pgSize}
       />
-      <Pagination
-        itemCount={count}
-        pageNumber={Number(page || 1)}
-        pageSize={pageSize}
-      />
+      <div className="flex justify-between items-center flex-wrap gap-3">
+        <PageSizeDDL
+          name="pageSize"
+          placeholder="Page size"
+          pageSize={pgSize}
+        />
+        <Pagination
+          itemCount={count}
+          pageNumber={Number(page || 1)}
+          pageSize={pgSize}
+        />
+      </div>
     </div>
   );
 }
@@ -55,5 +64,5 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Issue Tracker - Issues",
-  description: "View all project issues"
-}
+  description: "View all project issues",
+};

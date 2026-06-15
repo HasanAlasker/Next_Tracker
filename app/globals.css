@@ -23,6 +23,9 @@
   --color-fadedIcon: var(--fadedIcon);
 }
 
+html {
+  background-color: #f6f6f6;
+}
 main {
   padding: 1rem;
 }
@@ -97,15 +100,16 @@ Form {
 table {
   width: 100%;
   border: 1px var(--outline) solid;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
+  background-color: white;
 }
 td,
 th {
-  border-bottom: 1px solid var(--fadedIcon);
-  padding: .8rem;
+  border-bottom: 1px solid var(--outline);
+  padding: 0.8rem;
   text-align: left;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 }

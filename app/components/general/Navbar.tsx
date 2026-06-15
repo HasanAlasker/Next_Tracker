@@ -25,7 +25,7 @@ export default function Navbar() {
       ];
 
   return (
-    <nav className="flex items-center justify-between text-md md:text-xl px-6 py-4 mb-10 border-b border-zinc-400">
+    <nav className="flex items-center justify-between text-md md:text-xl px-6 py-4 mb-10 border-b border-zinc-400 bg-white">
       <div className="flex space-x-6">
         {LinkList.map((link) => (
           <Link

@@ -24,7 +24,7 @@ export default async function LatestIssues() {
           />
           <Badge status={i.status} />
         </div>
-        <div className="flex items-center justify-center rounded-full w-12 aspect-square bg-purple-600 text-blue-100 font-bold">
+        <div className="flex items-center justify-center rounded-full w-10 aspect-square bg-purple-600 text-blue-100 font-bold">
           {i.assignTo.name[0].toUpperCase()}
         </div>
       </td>

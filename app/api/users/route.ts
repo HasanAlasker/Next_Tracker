@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const user = getAuthUser(request);
   const users = await prisma.user.findMany({
     where: { id: { not: user?.id } },
-    orderBy: { name: "asc" },
+    orderBy: { name: "desc" },
   });
   return NextResponse.json({ users }, { status: 200 });
 }

@@ -4,7 +4,7 @@ import StyledLink from "../general/StyledLink";
 
 export default async function LatestIssues() {
   const issues = await prisma.issue.findMany({
-    orderBy: { createdAt: "asc" },
+    orderBy: { createdAt: "desc" },
     take: 5,
     include: {
       assignTo: true,

@@ -13,6 +13,15 @@ The project allows users to create, manage, assign, and track issues through a c
 
 ---
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="https://media.licdn.com/dms/image/v2/D4D2DAQFVD-M2FW0daA/profile-treasury-image-shrink_1280_1280/B4DZ7P41XXKAAY-/0/1781604243303?e=1783022400&v=beta&t=rY0v9-VMQNcGwwRrK4Zx61_FuIY8D63tDwKbtKdoyTU" width="100%" />
+</p>
+
+* [🔗 Live Demo ](https://nexttracker.netlify.app)
+---
+
 ## ✨ Features
 
 * 🔐 JWT-based authentication
@@ -107,15 +116,6 @@ The application will be available at:
 ```text
 http://localhost:3000
 ```
-
----
-
-## 📸 Screenshots
-
-Add screenshots of:
-
-> comming soon...
-
 ---
 
 ## 🎯 Learning Objectives
